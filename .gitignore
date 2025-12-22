@@ -1,0 +1,25 @@
+# 二进制文件
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+.DS_Store
+# 测试输出
+_test.go
+_testmain.go
+
+# 输出目录
+dist/
+out/
+
+# 依赖管理
+vendor/
+Gopkg.lock
+go.sum
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
