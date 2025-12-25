@@ -2,7 +2,6 @@ package main
 
 import (
 	"bytes"
-	"crypto/sha256"
 	"encoding/binary"
 	"log"
 	"time"
@@ -44,7 +43,14 @@ func NewBlock(date string, preBlockHash []byte) *Block {
 		Hash:       []byte{}, //先填空，后面再计算
 		Date:       []byte(date),
 	}
-	block.SetHash()
+	//block.SetHash()
+	//创建pow对象
+	pow := NewProofOfWork(&block)
+	//查找随机数，不停地进行hash运算
+	hash, nonce := pow.Run()
+	//根据挖矿结果，对区块数据进行更新（补充 ）
+	block.Hash = hash
+	block.Nonce = nonce
 	return &block
 }
 
@@ -59,19 +65,31 @@ func Uint64ToByte(num uint64) []byte {
 }
 
 // 3. ⽣成哈希
-func (block *Block) SetHash() {
-
-	var blockInfo []byte
-	//	1.拼装数据
-	blockInfo = append(blockInfo, Uint64ToByte(block.Version)...)
-	blockInfo = append(blockInfo, block.PreHash...)
-	blockInfo = append(blockInfo, block.MerkelRoot...)
-	blockInfo = append(blockInfo, Uint64ToByte(block.TimeStamp)...)
-	blockInfo = append(blockInfo, Uint64ToByte(block.Difficulty)...)
-	blockInfo = append(blockInfo, Uint64ToByte(block.Nonce)...)
-	blockInfo = append(block.PreHash, block.Date...)
-
-	//	2.shah256
-	hash := sha256.Sum256(blockInfo)
-	block.Hash = hash[:]
-}
+//func (block *Block) SetHash() {
+//
+//	var blockInfo []byte
+//	//	1.拼装数据
+//	//blockInfo = append(blockInfo, Uint64ToByte(block.Version)...)
+//	//blockInfo = append(blockInfo, block.PreHash...)
+//	//blockInfo = append(blockInfo, block.MerkelRoot...)
+//	//blockInfo = append(blockInfo, Uint64ToByte(block.TimeStamp)...)
+//	//blockInfo = append(blockInfo, Uint64ToByte(block.Difficulty)...)
+//	//blockInfo = append(blockInfo, Uint64ToByte(block.Nonce)...)
+//	//blockInfo = append(block.PreHash, block.Date...)
+//
+//	tmp := [][]byte{
+//		Uint64ToByte(block.Version),
+//		block.PreHash,
+//		block.MerkelRoot,
+//		Uint64ToByte(block.TimeStamp),
+//		Uint64ToByte(block.Difficulty),
+//		Uint64ToByte(block.Nonce),
+//		block.Date,
+//	}
+//	//将二维的切片数组连接起来，返回一个一维的切片
+//	blockInfo = bytes.Join(tmp, []byte{})
+//
+//	//	2.shah256
+//	hash := sha256.Sum256(blockInfo)
+//	block.Hash = hash[:]
+//}

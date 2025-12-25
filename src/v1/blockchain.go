@@ -7,7 +7,7 @@ type BlockChain struct {
 }
 
 // 5. 定义一个区块链
-func NewBLockChain() *BlockChain {
+func NewBlockChain() *BlockChain {
 	//创建一个创世块，并作为第一个区块添加到区块链中
 	genesisBlock := GenesisBlock()
 	return &BlockChain{

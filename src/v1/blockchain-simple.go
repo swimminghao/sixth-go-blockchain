@@ -79,7 +79,7 @@ import "fmt"
 //
 // //6. 重构代码
 func main() {
-	bc := NewBLockChain()
+	bc := NewBlockChain()
 	bc.AddBlock("班长向班花转了50枚比特币！")
 	bc.AddBlock("班长又向班花转了50枚比特币！")
 	bc.AddBlock("班长又向班花转了40枚比特币！")
