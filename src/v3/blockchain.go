@@ -1,8 +1,8 @@
 package main
 
 import (
-	"./bolt"
 	"log"
+	"sixth-go-blockchain/src/v3/bolt"
 	//"fmt"
 )
 
@@ -22,7 +22,7 @@ type BlockChain struct {
 const blockChainDb = "blockChain.db"
 const blockBucket = "blockBucket"
 
-//5. 定义一个区块链
+// 5. 定义一个区块链
 func NewBlockChain() *BlockChain {
 	//return &BlockChain{
 	//	blocks: []*Block{genesisBlock},
@@ -74,15 +74,15 @@ func NewBlockChain() *BlockChain {
 	return &BlockChain{db, lastHash}
 }
 
-//定义一个创世块
+// 定义一个创世块
 func GenesisBlock() *Block {
 	return NewBlock("Go一期创世块，老牛逼了！", []byte{})
 }
 
-//5. 添加区块
+// 5. 添加区块
 func (bc *BlockChain) AddBlock(data string) {
 	//如何获取前区块的哈希呢？？
-	db := bc.db //区块链数据库
+	db := bc.db         //区块链数据库
 	lastHash := bc.tail //最后一个区块的哈希
 
 	db.Update(func(tx *bolt.Tx) error {
@@ -92,7 +92,6 @@ func (bc *BlockChain) AddBlock(data string) {
 		if bucket == nil {
 			log.Panic("bucket 不应该为空，请检查!")
 		}
-
 
 		//a. 创建新的区块
 		block := NewBlock(data, lastHash)
@@ -108,20 +107,3 @@ func (bc *BlockChain) AddBlock(data string) {
 		return nil
 	})
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

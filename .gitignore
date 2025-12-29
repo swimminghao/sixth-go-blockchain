@@ -5,6 +5,10 @@
 *.so
 *.dylib
 .DS_Store
+block
+blockChain.db
+test.db
+
 # 测试输出
 _test.go
 _testmain.go
