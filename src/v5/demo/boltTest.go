@@ -2,13 +2,12 @@ package main
 
 import (
 	"fmt"
+	"go一期/bolt"
 	"log"
-	"sixth-go-blockchain/src/lib/bolt"
 )
 
 func main() {
 	//1. 打开数据库
-
 	db, err := bolt.Open("test.db", 0600, nil)
 	defer db.Close()
 
@@ -47,8 +46,8 @@ func main() {
 		v1 := bucket.Get([]byte("11111"))
 		v2 := bucket.Get([]byte("22222"))
 
-		fmt.Printf("v1 : key-%s,value-%s\n", []byte("11111"), v1)
-		fmt.Printf("v2 : key-%s,value-%s\n", []byte("22222"), v2)
+		fmt.Printf("v1 : %s\n", v1)
+		fmt.Printf("v2 : %s\n", v2)
 
 		return nil
 	})

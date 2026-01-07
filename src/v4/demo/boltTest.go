@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"go一期/bolt"
 	"log"
+	"sixth-go-blockchain/src/lib/bolt"
 )
 
 func main() {

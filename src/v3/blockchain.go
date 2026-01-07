@@ -2,7 +2,7 @@ package main
 
 import (
 	"log"
-	"sixth-go-blockchain/src/internal/bolt"
+	"sixth-go-blockchain/src/lib/bolt"
 	//"fmt"
 )
 
